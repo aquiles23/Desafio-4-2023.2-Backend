@@ -4,7 +4,7 @@ import { carroSchema } from "../schemas/carro";
 import { createMotorista, allMotoristas } from "../repositories/motorista";
 import { carrosPorMotorista, createCarro } from "../repositories/carro";
 import { multaSchema } from "../schemas/multa";
-import { createMulta } from "../repositories/multa";
+import { createMulta, multaPorMotorista, multasRetidas } from "../repositories/multa";
 
 const apiRoutes = Routes();
 
@@ -36,4 +36,11 @@ apiRoutes.post("/multa", async (req, res) => {
   await createMulta(body);
   res.send(201);
 });
+
+apiRoutes.get("/multa/retidos", async (req, res) => res.status(200).json(await multasRetidas()));
+
+apiRoutes.get("/multa/:cpf", async (req, res) => {
+  res.status(200).json(await multaPorMotorista(req.params.cpf));
+});
+
 export default apiRoutes;
