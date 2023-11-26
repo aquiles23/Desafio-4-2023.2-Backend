@@ -14,7 +14,7 @@ export const createMotorista = async (body: Motorista): Promise<any> =>
     [body.cpf, body.nome, body.vencimento_cnh, body.categoria_cnh],
   );
 
-export const allMotoristas = async () =>
+export const allMotoristas = async (): Promise<any> =>
   motoristaSchema
     .array()
     .parse(await mysqlConn.query("SELECT cpf, nome, vencimento_cnh, categoria_cnh from PROPRIETARIO"));

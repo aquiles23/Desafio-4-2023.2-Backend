@@ -10,13 +10,13 @@ interface Carro {
   cpf_motorista?: string | undefined;
 }
 
-export const createCarro = async (body: Carro) =>
+export const createCarro = async (body: Carro): Promise<any> =>
   await mysqlConn.execute(
     "INSERT into VEICULO(placa, marca, modelo, ano, cor, cpf_motorista) values(?,?,?,?,?,?)",
     [body.placa, body.marca, body.modelo, body.ano, body.cor, body.cpf_motorista],
   );
 
-export const carrosPorMotorista = async (cpf: string) =>
+export const carrosPorMotorista = async (cpf: string): Promise<any> =>
   carroSchema
     .array()
     .parse(
