@@ -4,7 +4,7 @@ use detran;
 
 
 CREATE TABLE PROPRIETARIO (
-    nome_completo varchar(500) ,
+    nome varchar(500) ,
     endereco text ,
     cidade varchar(500) ,
     cpf VARCHAR(30)  not null PRIMARY KEY,
@@ -22,14 +22,11 @@ CREATE TABLE VEICULO (
     cor varchar(200) ,
     ano_fabricacao int ,
     cd_modelo MEDIUMINT ,
-    cpf VARCHAR(30) ,
+    cpf_motorista VARCHAR(30) ,
     marca varchar(500),
-    modelo varchar(500)
-    CONSTRAINT FK_VEICULO_MODELO
-        FOREIGN KEY (cd_modelo)
-        REFERENCES MODELO (cd_modelo),
+    modelo varchar(500),
     CONSTRAINT FK_VEICULO_PROPRIETARIO
-        FOREIGN KEY (cpf)
+        FOREIGN KEY (cpf_motorista)
         REFERENCES PROPRIETARIO (cpf)
 )engine=InnoDB;
 
@@ -42,22 +39,17 @@ CREATE TABLE LOCAL (
 )engine=InnoDB;
 
 CREATE TABLE INFRACAO (
-    data_hora datetime ,
+    data datetime ,
     cd_infracao int not null AUTO_INCREMENT PRIMARY KEY,
     velocidade_aferida_km_hora double,
-    cd_tp_infracao int ,
-    placa VARCHAR(30) ,
+    tipo varchar(500) ,
+    placa_carro VARCHAR(30) ,
     descricao varchar(500) ,
-    preco decimal(64,2) ,
-    pontos int 
-
- 
-    CONSTRAINT FK_INFRACAO_TP_INFRACAO
-        FOREIGN KEY (cd_tp_infracao)
-        REFERENCES TP_INFRACAO (cd_tp_infracao),
+    valor decimal(64,2) ,
+    pontos int ,
  
     CONSTRAINT FK_INFRACAO_VEICULO
-        FOREIGN KEY (placa)
-        REFERENCES VEICULO (placa),
+        FOREIGN KEY (placa_carro)
+        REFERENCES VEICULO (placa)
 )engine=InnoDB;
  
