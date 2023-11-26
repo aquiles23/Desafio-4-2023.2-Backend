@@ -6,5 +6,5 @@ export const carroSchema = z.object({
   modelo: z.string().max(500),
   ano: z.number().min(1000),
   cor: z.string().max(200),
-  cpf_motorista: z.string().max(30),
+  cpf_motorista: z.string().max(30).optional(),
 });

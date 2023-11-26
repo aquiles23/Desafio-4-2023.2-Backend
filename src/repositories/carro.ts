@@ -1,4 +1,5 @@
 import { mysqlConn } from "../base/mysql";
+import { carroSchema } from "../schemas/carro";
 
 interface Carro {
   placa: string;
@@ -6,7 +7,7 @@ interface Carro {
   modelo: string;
   ano: number | string;
   cor: string;
-  cpf_motorista: string;
+  cpf_motorista?: string | undefined;
 }
 
 export const createCarro = async (body: Carro) =>
@@ -14,3 +15,12 @@ export const createCarro = async (body: Carro) =>
     "INSERT into VEICULO(placa, marca, modelo, ano, cor, cpf_motorista) values(?,?,?,?,?,?)",
     [body.placa, body.marca, body.modelo, body.ano, body.cor, body.cpf_motorista],
   );
+
+export const carrosPorMotorista = async (cpf: string) =>
+  carroSchema
+    .array()
+    .parse(
+      await mysqlConn.query("SELECT placa, marca, modelo, ano, cor from VEICULO where cpf_motorista = ?", [
+        cpf,
+      ]),
+    );
