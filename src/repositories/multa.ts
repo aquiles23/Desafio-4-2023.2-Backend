@@ -5,7 +5,7 @@ interface Multa {
   data: string | Date;
   pontos: number;
   tipo: string;
-  placa_carro: string;
+  placa_carro?: string | undefined;
 }
 
 export const createMulta = async (body: Multa): Promise<any> =>
