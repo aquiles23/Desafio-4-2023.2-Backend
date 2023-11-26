@@ -18,9 +18,8 @@ CREATE TABLE PROPRIETARIO (
 
 CREATE TABLE VEICULO (
     placa VARCHAR(30) not null PRIMARY KEY,
-    chassi varchar(500) not null UNIQUE,
     cor varchar(200) ,
-    ano_fabricacao int ,
+    ano int ,
     cd_modelo MEDIUMINT ,
     cpf_motorista VARCHAR(30) ,
     marca varchar(500),
@@ -30,21 +29,12 @@ CREATE TABLE VEICULO (
         REFERENCES PROPRIETARIO (cpf)
 )engine=InnoDB;
 
-CREATE TABLE LOCAL (
-    latitude decimal ,
-    longitude decimal ,
-    velocidade_max_km_hora int,
-    cd_local int  AUTO_INCREMENT PRIMARY KEY,
-    UNIQUE (latitude, longitude)
-)engine=InnoDB;
-
 CREATE TABLE INFRACAO (
     data datetime ,
     cd_infracao int not null AUTO_INCREMENT PRIMARY KEY,
     velocidade_aferida_km_hora double,
     tipo varchar(500) ,
     placa_carro VARCHAR(30) ,
-    descricao varchar(500) ,
     valor decimal(64,2) ,
     pontos int ,
  
