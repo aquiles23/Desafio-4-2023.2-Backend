@@ -1,7 +1,7 @@
 import { mysqlConn } from "../base/mysql";
 import { motoristaSchema } from "../schemas/motorista";
 
-export interface Motorista {
+interface Motorista {
   cpf: string;
   nome: string;
   vencimento_cnh: string | Date;
